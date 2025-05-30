@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Habbit App</title>
+    <title>Habbits Tracker App</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -17,11 +17,11 @@
   <body>
     <div class="app">
       <div class="panel">
-        <img class="logo" src="/images/logo.svg" alt="Логотип Habbit App" />
+        <img class="logo" src="./images/logo.svg" alt="Логотип Habbit App" />
         <nav class="menu">
           <div class="menu__list"></div>
           <button class="menu__add" onclick="togglePopup()">
-            <img src="/images/add.svg" alt="Добавить привычку" />
+            <img src="./images/add.svg" alt="Добавить привычку" />
           </button>
         </nav>
       </div>
@@ -51,7 +51,7 @@
               />
               <img
                 class="input__icon"
-                src="/images/comment.svg"
+                src="./images/comment.svg"
                 alt="Иконка комментария"
               />
               <button class="button" type="submit">Готово</button>
@@ -92,6 +92,6 @@
         </div>
       </div>
     </div>
-    <script src="./scripts/app.js"></script>
+    <script src="./scripts/app.js" type="module"></script>
   </body>
 </html>
