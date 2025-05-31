@@ -106,12 +106,15 @@ function renderBody(activeHabbit) {
       currentHabbit.insertAdjacentHTML('beforeend', comment);
     }
     else {
-      const form = (`<form class="habbit__form">
+      const form = document.createElement('form');
+      form.classList.add("habbit__form");
+      form.innerHTML = (`
         <input
         name="comment"
         class="input_icon"
         type="text"
         placeholder="Comment"
+        value=""
         />
         <img
         class="input__icon"
@@ -119,35 +122,47 @@ function renderBody(activeHabbit) {
         alt="Comment item"
         />
         <button class="button" type="submit">Done</button>
-        </form>`);
-        currentHabbit.insertAdjacentHTML('beforeend', form);
+        `);
+        currentHabbit.insertAdjacentElement('beforeend', form);
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          const index = getEventTargetIndex(e);
+          const formData = new FormData(form);
+          const comment = formData.get('comment')
+          console.log(comment)
+          if (comment !== '') {
+            setComment(index, comment);
+          }
+        })
       }
     page.main.main.append(currentHabbit);
   });
 }
 
-page.main.main.addEventListener('click', (event) => {
-  if (event.target.matches('.habbit__delete')) {
-    console.log('page children', page.main.main.children)
-    console.log('event ', event.target.closest('.habbit'))
+page.main.main.addEventListener('click', (e) => {
+  if (e.target.matches('.habbit__delete')) {
     // index of habbit.days!!!
-    const index = Array.from(page.main.main.children).indexOf(event.target.closest('.habbit'));
-    console.log('index', index)
-    console.log('active id ', activeID)
-    console.log('habbit of index', habbits[activeID].days[index])
-
-    deleteComment(index);
+    const index = getEventTargetIndex(e);//Array.from(page.main.main.children).indexOf(e.target.closest('.habbit'));
+    setComment(index, '');
   }
 });
 
-function deleteComment(index) {
-  console.log('comment to delete ', habbits[activeID].days[index].comment)
-  habbits[activeID].days[index].comment = '';
-  console.log('new habbits ', habbits)
+function getEventTargetIndex (e) {
+  return Array.from(page.main.main.children).indexOf(e.target.closest('.habbit'));
+}
+
+function setComment(index, text) {
+  //console.log('comment to delete ', habbits[activeID].days[index].comment)
+  habbits[activeID].days[index].comment = text;
+  //console.log('new habbits ', habbits)
 
   saveData(habbits);
   //console.log('active habbit id', activeHabbit.id)
   rerender(activeID);
+}
+
+function setNewComment(index, text) {
+  habbits[activeID].days[index].comment = text;
 }
 
 function rerender(activeID) {
