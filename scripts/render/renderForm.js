@@ -1,3 +1,6 @@
+import getEventTargetIndex from '../utils/getEventTargetIndex.js';
+import setComment from '../utils/setComment.js';
+
 export default function renderForm() {
   const form = document.createElement('form');
   form.classList.add('habbit__form');

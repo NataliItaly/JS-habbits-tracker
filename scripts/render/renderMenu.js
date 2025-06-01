@@ -1,6 +1,7 @@
 import { page } from '../variables/page.js';
 import { habbits } from '../variables/habbits.js';
 import { activeID } from '../variables/activeId.js';
+import rerender from './rerender.js';
 
 export default function renderMenu(activeHabbit) {
   page.main.main.innerHTML = '';
@@ -12,7 +13,14 @@ export default function renderMenu(activeHabbit) {
       newElement.setAttribute('menu-habbit-id', habbit.id);
       newElement.classList.add('menu__item');
       newElement.innerHTML = `<img src="./images/${habbit.icon}.svg" alt="${habbit.name}" />`;
-      newElement.addEventListener('click', () => rerender(habbit.id, habbits));
+      newElement.addEventListener('click', () => {
+        console.log('click menu');
+        console.log(activeID);
+        activeID.id = habbit.id;
+        console.log(activeID);
+
+        rerender();
+      });
       if (activeHabbit.id === habbit.id) {
         newElement.classList.add('menu__item_active');
       }

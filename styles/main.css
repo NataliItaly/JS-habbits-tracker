@@ -158,7 +158,7 @@ main {
   background: #dcdaff;
 }
 
-.habbit {
+.day {
   background: #ffffff;
   border-radius: 10px;
   display: flex;
@@ -166,7 +166,7 @@ main {
   margin-bottom: 12px;
 }
 
-.habbit__day {
+.day__index {
   background: #fbfaff;
   border-radius: 10px 0 0 10px;
   border-right: 1px solid #e7ebfb;
@@ -176,7 +176,7 @@ main {
   min-width: 150px;
 }
 
-.habbit__comment {
+.day__comment {
   height: 42px;
   flex-grow: 1;
   display: flex;
@@ -186,11 +186,11 @@ main {
   line-height: 18px;
 }
 
-.habbit__comment-text {
+.day__comment-text {
   flex-grow: 1;
 }
 
-.habbit__delete {
+.day__delete {
   margin-right: 0;
   background: none;
   border: none;
@@ -201,11 +201,11 @@ main {
   background-color: #f7b6b6;
 }
 
-.habbit__delete:hover {
+.day__delete:hover {
   background: #eff2ff;
 }
 
-.habbit__edit {
+.day__edit {
   color: green;
   background-color: rgb(151, 245, 151);
 }

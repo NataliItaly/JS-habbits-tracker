@@ -8,6 +8,8 @@ import loadData from './utils/loadData.js';
 import saveData from './utils/saveData.js';
 import rerender from './render/rerender.js';
 import renderForm from './render/renderForm.js';
+import getEventTargetIndex from './utils/getEventTargetIndex.js';
+import setComment from './utils/setComment.js';
 
 
 //let activeID = 0;
@@ -19,48 +21,28 @@ window.addEventListener('DOMContentLoaded',()=>{
     }
     habbits.habbitsArr = loadData(habbits);
 
-    rerender(habbits.habbitsArr[activeID.id].id)
+    rerender()
   });
 
 //(() => loadData())();
 
 page.main.main.addEventListener('click', (e) => {
-  if (e.target.matches('.habbit__delete')) {
+  if (e.target.matches('.day__delete')) {
     // index of habbit.days!!!
     const index = getEventTargetIndex(e);
     setComment(index, '');
   }
-  if (e.target.matches('.habbit__edit')) {
+  if (e.target.matches('.day__edit')) {
     // index of habbit.days!!!
     const index = getEventTargetIndex(e);
-    document.querySelectorAll('.habbit__comment')[index].remove()
-    const currentHabbit = document.querySelectorAll('.habbit')[index];
+    document.querySelectorAll('.day__comment')[index].remove()
+    const currentDay = document.querySelectorAll('.day')[index];
     const form = renderForm();
-    currentHabbit.append(form)
+    currentDay.append(form)
   }
 });
 
-function getEventTargetIndex (e) {
-  return Array.from(page.main.main.children).indexOf(e.target.closest('.habbit'));
-}
-
-function setComment(index, text) {
-  habbits[activeID.id].days[index].comment = text;
-
-  saveData(habbits);
-  rerender(activeID);
-}
 
 
-
-/*function rerender(activeID) {
-  const activeHabbit = habbits.find(habbit => habbit.id === activeID.id)
-  if (!activeHabbit) return;
-
-  renderMenu(activeHabbit, habbits)
-  activeID = activeHabbit.id;
-  renderHead(activeHabbit)
-  renderBody(activeHabbit)
-}*/
 
 
