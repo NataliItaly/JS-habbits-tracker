@@ -1,119 +1,28 @@
 'use strict';
 import data from '../data/demo.json'  with { type: 'json' };
+import { HABBIT_KEY } from './variables/habbitKey.js';
+import {page} from './variables/page.js';
+import { activeID } from './variables/activeId.js';
+import { habbits } from './variables/habbits.js';
+import loadData from './utils/loadData.js';
+import saveData from './utils/saveData.js';
+import rerender from './render/rerender.js';
+import renderForm from './render/renderForm.js';
 
 
+//let activeID = 0;
 
-let habbits = [];
-const HABBIT_KEY = 'HABBIT_KEY';
-let activeID = 0;
 
-const page = {
-  menu: document.querySelector('.menu__list'),
-  header: {
-    h1: document.querySelector('.h1'),
-    progressPercent: document.querySelector('.progress__percent'),
-    progressCoverBar: document.querySelector('.progress__cover-bar')
-  },
-  main: {
-    main: document.querySelector('main'),
-    days: document.querySelector('.days'),
-    habbit: {
-      day: document.querySelector('.habbit__day'),
-      form: document.querySelector('.habbit__form'),
-      delete: document.querySelector('.habbit__delete'),
-      comments: document.querySelectorAll('.habbit__comment')
-    }
-  }
-}
 window.addEventListener('DOMContentLoaded',()=>{
-
     if(!localStorage.getItem(HABBIT_KEY)) {
       saveData(data);
     }
-    loadData()
-    //console.log(habbits)
-    rerender(habbits[activeID].id)
+    habbits.habbitsArr = loadData(habbits);
+
+    rerender(habbits.habbitsArr[activeID.id].id)
   });
-
-function loadData() {
-  const habbitsString = localStorage.getItem(HABBIT_KEY);
-
-  const habbitArr = JSON.parse(habbitsString);
-
-  if (Array.isArray(habbitArr)) {
-      habbits = habbitArr;
-  }
-}
-
-function saveData(value) {
-  console.log('value from save', value)
-  localStorage.setItem(HABBIT_KEY, JSON.stringify(value));
-}
 
 //(() => loadData())();
-
-function renderMenu(activeHabbit) {
-  page.main.main.innerHTML = '';
-
-  for (const habbit of habbits) {
-    const element = document.querySelector(`[menu-habbit-id="${habbit.id}"]`);
-    if (!element) {
-      const newElement = document.createElement('button');
-      newElement.setAttribute('menu-habbit-id', habbit.id);
-      newElement.classList.add('menu__item');
-      newElement.innerHTML = `<img src="./images/${habbit.icon}.svg" alt="${habbit.name}" />`;
-      newElement.addEventListener('click', () => rerender(habbit.id))
-      if (activeHabbit.id === habbit.id) {
-        newElement.classList.add('menu__item_active');
-      }
-      page.menu.append(newElement)
-      continue;
-    }
-    if (activeHabbit.id === habbit.id) {
-      element.classList.add('menu__item_active');
-    }
-    else {
-      element.classList.remove('menu__item_active');
-    }
-  }
-
-  activeID = activeHabbit.id
-}
-
-function renderHead(activeHabbit) {
-  if (!activeHabbit) return;
-  page.header.h1.innerText = activeHabbit.name
-  const progress = activeHabbit.days.length / activeHabbit.target > 1 ? 100 : activeHabbit.days.length / activeHabbit.target * 100;
-  page.header.progressPercent.innerHTML = `${progress.toFixed(0)}%`
-  page.header.progressCoverBar.setAttribute('style', `width: ${progress}%`)
-}
-
-function renderBody(activeHabbit) {
-  activeHabbit.days.forEach((day, i) => {
-    const currentHabbit = document.createElement('div');
-    currentHabbit.classList.add('habbit');
-    const currentDay = document.createElement('div');
-    currentDay.classList.add('habbit__day');
-    currentDay.textContent = `Day ${i + 1}`;
-    currentHabbit.append(currentDay);
-
-    if (day.comment !== "") {
-      const comment = (`
-          <div class="habbit__comment">
-            <p class="habbit__comment-text">${day.comment}</p>
-            <button class="button habbit__delete">Delete</button>
-            <button class="button habbit__edit">Edit</button>
-          </div>
-        `);
-      currentHabbit.insertAdjacentHTML('beforeend', comment);
-    }
-    else {
-      const form = renderForm();
-      currentHabbit.insertAdjacentElement('beforeend', form);
-    }
-    page.main.main.append(currentHabbit);
-  });
-}
 
 page.main.main.addEventListener('click', (e) => {
   if (e.target.matches('.habbit__delete')) {
@@ -122,18 +31,12 @@ page.main.main.addEventListener('click', (e) => {
     setComment(index, '');
   }
   if (e.target.matches('.habbit__edit')) {
-    //.remove()
     // index of habbit.days!!!
     const index = getEventTargetIndex(e);
-    //console.log(document.querySelectorAll('.habbit__comment')[index])
     document.querySelectorAll('.habbit__comment')[index].remove()
     const currentHabbit = document.querySelectorAll('.habbit')[index];
     const form = renderForm();
-    console.log(form)
-    console.log(currentHabbit)
     currentHabbit.append(form)
-    //const currentComment = page.main.habbit[index]
-    //setComment(index, '');
   }
 });
 
@@ -142,56 +45,22 @@ function getEventTargetIndex (e) {
 }
 
 function setComment(index, text) {
-  //console.log('comment to delete ', habbits[activeID].days[index].comment)
-  habbits[activeID].days[index].comment = text;
-  //console.log('new habbits ', habbits)
+  habbits[activeID.id].days[index].comment = text;
 
   saveData(habbits);
-  //console.log('active habbit id', activeHabbit.id)
   rerender(activeID);
 }
 
-function renderForm() {
-  const form = document.createElement('form');
-      form.classList.add("habbit__form");
-      form.innerHTML = (`
-        <input
-        name="comment"
-        class="input_icon"
-        type="text"
-        placeholder="Comment"
-        value=""
-        />
-        <img
-        class="input__icon"
-        src="./images/comment.svg"
-        alt="Comment item"
-        />
-        <button class="button" type="submit">Done</button>
-        `);
 
-        form.addEventListener('submit', function(e) {
-          e.preventDefault();
-          const index = getEventTargetIndex(e);
-          const formData = new FormData(form);
-          const comment = formData.get('comment')
-          console.log(comment)
-          if (comment !== '') {
-            setComment(index, comment);
-          }
-        });
-        //console.log(document.querySelectorAll('.habbit')[i])
-        //            document.querySelectorAll('.habbit')[i].insertAdjacentElement('beforeend', form);
-  return form;
-}
 
-function rerender(activeID) {
-  const activeHabbit = habbits.find(habbit => habbit.id === activeID)
+/*function rerender(activeID) {
+  const activeHabbit = habbits.find(habbit => habbit.id === activeID.id)
   if (!activeHabbit) return;
 
-  renderMenu(activeHabbit)
+  renderMenu(activeHabbit, habbits)
+  activeID = activeHabbit.id;
   renderHead(activeHabbit)
   renderBody(activeHabbit)
-}
+}*/
 
 
