@@ -166,6 +166,10 @@ main {
   margin-bottom: 12px;
 }
 
+.day__next {
+  border: 1px solid rgb(116, 116, 247);
+}
+
 .day__index {
   background: #fbfaff;
   border-radius: 10px 0 0 10px;
@@ -222,8 +226,12 @@ input {
   line-height: 16px;
 }
 
-input::placeholder {
-  color: #8899a8;
+.day input::placeholder {
+  color: #39f539;
+}
+
+.day__next input::placeholder {
+  color: #5051f9;
 }
 
 input.error {

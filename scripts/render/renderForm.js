@@ -1,7 +1,11 @@
 import getEventTargetIndex from '../utils/getEventTargetIndex.js';
 import setComment from '../utils/setComment.js';
+import { habbits } from '../variables/habbits.js';
+import { activeID } from '../variables/activeId.js';
+import saveData from '../utils/saveData.js';
+import rerender from './rerender.js';
 
-export default function renderForm() {
+export default function renderForm(inputPlaceholder) {
   const form = document.createElement('form');
   form.classList.add('habbit__form');
   form.innerHTML = `
@@ -9,8 +13,9 @@ export default function renderForm() {
         name="comment"
         class="input_icon"
         type="text"
-        placeholder="Comment"
+        placeholder="${inputPlaceholder}"
         value=""
+        required
         />
         <img
         class="input__icon"
@@ -25,9 +30,21 @@ export default function renderForm() {
     const index = getEventTargetIndex(e);
     const formData = new FormData(form);
     const comment = formData.get('comment');
+    //const
+    console.log('active ', activeID);
+    console.log('last ', habbits.habbitsArr[activeID.id].days.length);
     console.log(comment);
-    if (comment !== '') {
+    console.log('index ', index);
+    if (comment === '') {
+      return;
+    }
+    if (index < habbits.habbitsArr[activeID.id].days.length - 1) {
       setComment(index, comment);
+    } else {
+      habbits.habbitsArr[activeID.id].days.push({ comment: comment });
+      console.log(habbits);
+      saveData(habbits);
+      rerender();
     }
   });
   return form;

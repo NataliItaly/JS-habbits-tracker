@@ -17,6 +17,7 @@ import setComment from './utils/setComment.js';
 
 window.addEventListener('DOMContentLoaded',()=>{
     if(!localStorage.getItem(HABBIT_KEY)) {
+      console.log(data)
       saveData(data);
     }
     habbits.habbitsArr = loadData(habbits);
@@ -37,7 +38,7 @@ page.main.main.addEventListener('click', (e) => {
     const index = getEventTargetIndex(e);
     document.querySelectorAll('.day__comment')[index].remove()
     const currentDay = document.querySelectorAll('.day')[index];
-    const form = renderForm();
+    const form = renderForm('Edit your comment');
     currentDay.append(form)
   }
 });

@@ -20,10 +20,18 @@ export default function renderBody(activeHabbit) {
         `;
       currentDay.insertAdjacentHTML('beforeend', comment);
     } else {
-      const form = renderForm();
+      const form = renderForm('Edit your comment');
       currentDay.insertAdjacentElement('beforeend', form);
     }
     page.main.main.append(currentDay);
   });
-  const nextDay =
+  const nextDay = document.createElement('div');
+  nextDay.classList.add('day', 'day__next');
+  const nextDayIndex = document.createElement('div');
+  nextDayIndex.classList.add('day__index');
+  nextDayIndex.textContent = `Day ${activeHabbit.days.length + 1}`;
+  nextDay.append(nextDayIndex);
+  nextDay.append(renderForm('Add new day'));
+
+  page.main.main.append(nextDay);
 }
