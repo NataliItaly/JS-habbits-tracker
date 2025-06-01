@@ -20,7 +20,8 @@ const page = {
     habbit: {
       day: document.querySelector('.habbit__day'),
       form: document.querySelector('.habbit__form'),
-      delete: document.querySelector('.habbit__delete')
+      delete: document.querySelector('.habbit__delete'),
+      comments: document.querySelectorAll('.habbit__comment')
     }
   }
 }
@@ -101,40 +102,15 @@ function renderBody(activeHabbit) {
           <div class="habbit__comment">
             <p class="habbit__comment-text">${day.comment}</p>
             <button class="button habbit__delete">Delete</button>
+            <button class="button habbit__edit">Edit</button>
           </div>
         `);
       currentHabbit.insertAdjacentHTML('beforeend', comment);
     }
     else {
-      const form = document.createElement('form');
-      form.classList.add("habbit__form");
-      form.innerHTML = (`
-        <input
-        name="comment"
-        class="input_icon"
-        type="text"
-        placeholder="Comment"
-        value=""
-        />
-        <img
-        class="input__icon"
-        src="./images/comment.svg"
-        alt="Comment item"
-        />
-        <button class="button" type="submit">Done</button>
-        `);
-        currentHabbit.insertAdjacentElement('beforeend', form);
-        form.addEventListener('submit', function(e) {
-          e.preventDefault();
-          const index = getEventTargetIndex(e);
-          const formData = new FormData(form);
-          const comment = formData.get('comment')
-          console.log(comment)
-          if (comment !== '') {
-            setComment(index, comment);
-          }
-        })
-      }
+      const form = renderForm();
+      currentHabbit.insertAdjacentElement('beforeend', form);
+    }
     page.main.main.append(currentHabbit);
   });
 }
@@ -142,8 +118,22 @@ function renderBody(activeHabbit) {
 page.main.main.addEventListener('click', (e) => {
   if (e.target.matches('.habbit__delete')) {
     // index of habbit.days!!!
-    const index = getEventTargetIndex(e);//Array.from(page.main.main.children).indexOf(e.target.closest('.habbit'));
+    const index = getEventTargetIndex(e);
     setComment(index, '');
+  }
+  if (e.target.matches('.habbit__edit')) {
+    //.remove()
+    // index of habbit.days!!!
+    const index = getEventTargetIndex(e);
+    //console.log(document.querySelectorAll('.habbit__comment')[index])
+    document.querySelectorAll('.habbit__comment')[index].remove()
+    const currentHabbit = document.querySelectorAll('.habbit')[index];
+    const form = renderForm();
+    console.log(form)
+    console.log(currentHabbit)
+    currentHabbit.append(form)
+    //const currentComment = page.main.habbit[index]
+    //setComment(index, '');
   }
 });
 
@@ -161,8 +151,38 @@ function setComment(index, text) {
   rerender(activeID);
 }
 
-function setNewComment(index, text) {
-  habbits[activeID].days[index].comment = text;
+function renderForm() {
+  const form = document.createElement('form');
+      form.classList.add("habbit__form");
+      form.innerHTML = (`
+        <input
+        name="comment"
+        class="input_icon"
+        type="text"
+        placeholder="Comment"
+        value=""
+        />
+        <img
+        class="input__icon"
+        src="./images/comment.svg"
+        alt="Comment item"
+        />
+        <button class="button" type="submit">Done</button>
+        `);
+
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          const index = getEventTargetIndex(e);
+          const formData = new FormData(form);
+          const comment = formData.get('comment')
+          console.log(comment)
+          if (comment !== '') {
+            setComment(index, comment);
+          }
+        });
+        //console.log(document.querySelectorAll('.habbit')[i])
+        //            document.querySelectorAll('.habbit')[i].insertAdjacentElement('beforeend', form);
+  return form;
 }
 
 function rerender(activeID) {

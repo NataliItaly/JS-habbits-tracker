@@ -205,6 +205,11 @@ main {
   background: #eff2ff;
 }
 
+.habbit__edit {
+  color: green;
+  background-color: rgb(151, 245, 151);
+}
+
 input {
   background: #ffffff;
   border: 1px solid #e7ebfb;
