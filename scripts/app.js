@@ -19,15 +19,27 @@ import resetForm from './utils/resetForm.js';
 
 
 window.addEventListener('DOMContentLoaded',()=>{
+  console.log('loaded')
     if(!localStorage.getItem(HABBIT_KEY)) {
-      console.log(data)
       saveData(data);
     }
     habbits.habbitsArr = loadData(habbits);
 
-    rerender()
+    //rerender();
+    const hashId = Number(document.location.hash.replace('#', ''));
+    console.log('hash', hashId)
+    const urlHabbitId = habbits.habbitsArr.find(habbit => habbit.id === hashId - 1);
+    if (urlHabbitId) {
+      rerender(urlHabbitId.id)
+    }
+    else {
+      rerender()
+    }
   });
 
+(() => {
+
+})()
 
 page.main.main.addEventListener('click', (e) => {
   if (e.target.matches('.day__comment-delete')) {
