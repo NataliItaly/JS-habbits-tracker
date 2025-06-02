@@ -15,14 +15,5 @@ export default function validateForm(form, fields) {
     resultFormData[field] = fieldValue;
   }
 
-  /*for (const field of fields) {
-    if (!resultFormData[field]) {
-      isValid = false;
-    }
-  }
-  if (!isValid) {
-    return;
-  }
-*/
   return resultFormData;
 }

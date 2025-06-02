@@ -24,5 +24,6 @@ export const page = {
     close: document.querySelector('.popup__close'),
     iconBtns: document.querySelectorAll('.popup__icon'),
     form: document.querySelector('.popup__form'),
+    iconInput: document.getElementById('icon-input'),
   },
 };

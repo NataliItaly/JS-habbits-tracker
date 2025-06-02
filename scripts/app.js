@@ -18,11 +18,6 @@ import validateForm from './utils/validateForm.js';
 import resetForm from './utils/resetForm.js';
 
 
-
-
-//let activeID = 0;
-
-
 window.addEventListener('DOMContentLoaded',()=>{
     if(!localStorage.getItem(HABBIT_KEY)) {
       console.log(data)
@@ -32,8 +27,6 @@ window.addEventListener('DOMContentLoaded',()=>{
 
     rerender()
   });
-
-//(() => loadData())();
 
 
 page.main.main.addEventListener('click', (e) => {
