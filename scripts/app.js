@@ -10,6 +10,12 @@ import rerender from './render/rerender.js';
 import renderForm from './render/renderForm.js';
 import getEventTargetIndex from './utils/getEventTargetIndex.js';
 import setComment from './utils/setComment.js';
+import getCurrentDay from './utils/getCurrentDay.js';
+import toggleDayPopup from './utils/toggleDayPopup.js';
+import togglePopup from './utils/togglePopup.js';
+import setIcon from './utils/setIcon.js';
+
+
 
 
 //let activeID = 0;
@@ -27,31 +33,25 @@ window.addEventListener('DOMContentLoaded',()=>{
 
 //(() => loadData())();
 
+
 page.main.main.addEventListener('click', (e) => {
   if (e.target.matches('.day__comment-delete')) {
-    // index of habbit.days!!!
     const index = getEventTargetIndex(e);
     setComment(index, '');
   }
   if (e.target.matches('.day__comment-edit')) {
-    // index of habbit.days!!!
-    const index = getEventTargetIndex(e);
-    document.querySelectorAll('.day__comment')[index].remove()
-    const currentDay = document.querySelectorAll('.day')[index];
+    const currentDay = getCurrentDay(e);
+    currentDay.querySelector('.day__comment').remove()
     const form = renderForm('Edit your comment');
     currentDay.append(form)
   }
 
   if (e.target.matches('.day__delete-btn')) {
-    const index = getEventTargetIndex(e);
-    const currentDay = document.querySelectorAll('.day')[index];
-    currentDay.querySelector('.day__popup').classList.add('day__popup_visible')
+    toggleDayPopup(e)
   }
   if (e.target.matches('.day__popup-btn')) {
     const index = getEventTargetIndex(e);
-    console.log(index)
-    const currentDay = document.querySelectorAll('.day')[index];
-    console.log(currentDay)
+    const currentDay = getCurrentDay(e);
     currentDay.remove();
     habbits.habbitsArr = habbits.habbitsArr.map((habbit, i) => {
       if (i === activeID.id) {
@@ -62,13 +62,28 @@ page.main.main.addEventListener('click', (e) => {
         return habbit
       }
     })
-
-          console.log(habbits.habbitsArr);
-          saveData(habbits.habbitsArr);
-          rerender();
+    saveData(habbits.habbitsArr);
+    rerender();
+  }
+  if (e.target.matches('.day__popup-close')) {
+    toggleDayPopup(e)
   }
 });
 
+page.menu.menuAddBtn.addEventListener('click', function(e) {
+    togglePopup()
+});
+
+page.popup.close.addEventListener('click', function(e) {
+    togglePopup()
+});
+
+page.popup.cover.addEventListener('click', function(e) {
+  if (e.target.closest('.popup__icon')) {
+    page.popup.iconBtns.forEach(btn => btn.classList.remove('icon_active'))
+    setIcon(e)
+  }
+})
 
 
 

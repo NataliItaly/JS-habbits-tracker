@@ -24,7 +24,7 @@ export default function renderMenu(activeHabbit) {
       if (activeHabbit.id === habbit.id) {
         newElement.classList.add('menu__item_active');
       }
-      page.menu.append(newElement);
+      page.menu.menuList.append(newElement);
       continue;
     }
     if (activeHabbit.id === habbit.id) {

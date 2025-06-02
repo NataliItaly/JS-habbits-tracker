@@ -20,7 +20,7 @@
         <img class="logo" src="./images/logo.svg" alt="Habbit Tracker App" />
         <nav class="menu">
           <div class="menu__list"></div>
-          <button class="menu__add" onclick="togglePopup()">
+          <button class="menu__add">
             <img src="./images/add.svg" alt="Add habbit" />
           </button>
         </nav>
@@ -42,22 +42,22 @@
           <div id="days"></div>
         </main>
       </div>
-      <div class="cover cover_hidden" id="add-habbit-popup">
+      <div class="cover cover_hidden" id="habbit-popup">
         <div class="popup">
           <h2>Новая привычка</h2>
           <div class="icon-label">Icon</div>
           <div class="icon-select">
-            <button class="icon icon_active" onclick="setIcon(this, 'sport')">
+            <button class="popup__icon icon icon_active" data-item="sport">
               <img src="./images/sport.svg" alt="Sport" />
             </button>
-            <button class="icon" onclick="setIcon(this, 'water')">
+            <button class="popup__icon icon" data-item="drink">
               <img src="./images/water.svg" alt="Drink" />
             </button>
-            <button class="icon" onclick="setIcon(this, 'food')">
+            <button class="popup__icon icon" data-item="food">
               <img src="./images/food.svg" alt="Food" />
             </button>
           </div>
-          <form class="popup__form" onsubmit="addHabbit(event)">
+          <form class="popup__form">
             <input type="text" name="name" placeholder="Habbit's name" />
             <input
               type="text"
@@ -69,7 +69,7 @@
             <input type="number" name="target" placeholder="Target" />
             <button class="button" type="submit">Add</button>
           </form>
-          <button class="popup__close" onclick="togglePopup()">
+          <button class="popup__close">
             <img src="./images/close.svg" alt="Close" />
           </button>
         </div>

@@ -34,6 +34,7 @@ export default function renderBody(activeHabbit) {
     deleteDayPopUp.innerHTML = `
       <p>Are you sure delete day ${i + 1}?</p>
       <button class="day__popup-btn button">Yes, I want delete this day</button>
+      <button class="day__popup-close">x</button>
       `;
     deleteDayPopUp.addEventListener('click', function (e) {});
     currentDay.append(deleteDayPopUp);
