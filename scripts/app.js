@@ -14,6 +14,8 @@ import getCurrentDay from './utils/getCurrentDay.js';
 import toggleDayPopup from './utils/toggleDayPopup.js';
 import togglePopup from './utils/togglePopup.js';
 import setIcon from './utils/setIcon.js';
+import validateForm from './utils/validateForm.js';
+import resetForm from './utils/resetForm.js';
 
 
 
@@ -85,6 +87,23 @@ page.popup.cover.addEventListener('click', function(e) {
   }
 })
 
+page.popup.form.addEventListener('submit', function(e) {
+  e.preventDefault();
 
+  const data = validateForm(e.target, ['name', 'icon', 'target'])
+  if (!data) {
+    return;
+  }
+  habbits.habbitsArr = [...habbits.habbitsArr, {id: habbits.habbitsArr.length, name: data.name, target: data.target, icon: data.icon, days: []}];
+  console.log(habbits);
+
+  saveData(habbits.habbitsArr);
+  rerender();
+
+
+  togglePopup();
+
+  resetForm(e.target, ['name', 'icon', 'target'])
+})
 
 
