@@ -14,8 +14,8 @@ export default function renderBody(activeHabbit) {
       const comment = `
           <div class="day__comment">
             <p class="day__comment-text">${day.comment}</p>
-            <button class="button day__delete">Delete</button>
-            <button class="button day__edit">Edit</button>
+            <button class="button day__comment-delete">Delete comment</button>
+            <button class="button day__comment-edit">Edit comment</button>
           </div>
         `;
       currentDay.insertAdjacentHTML('beforeend', comment);
@@ -23,6 +23,21 @@ export default function renderBody(activeHabbit) {
       const form = renderForm('Edit your comment');
       currentDay.insertAdjacentElement('beforeend', form);
     }
+    const deleteDayBtn = document.createElement('button');
+    deleteDayBtn.classList.add('day__delete-btn', 'button');
+    deleteDayBtn.textContent = 'Delete day';
+    deleteDayBtn.addEventListener('click', function (e) {});
+    currentDay.append(deleteDayBtn);
+
+    const deleteDayPopUp = document.createElement('div');
+    deleteDayPopUp.classList.add('day__popup');
+    deleteDayPopUp.innerHTML = `
+      <p>Are you sure delete day ${i + 1}?</p>
+      <button class="day__popup-btn button">Yes, I want delete this day</button>
+      `;
+    deleteDayPopUp.addEventListener('click', function (e) {});
+    currentDay.append(deleteDayPopUp);
+
     page.main.main.append(currentDay);
   });
   const nextDay = document.createElement('div');

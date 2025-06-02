@@ -5,6 +5,7 @@ import renderHead from './renderHead.js';
 import renderBody from './renderBody.js';
 
 export default function rerender() {
+  console.log(habbits.habbitsArr);
   const activeHabbit = habbits.habbitsArr.find(
     (habbit) => habbit.id === activeID.id
   );

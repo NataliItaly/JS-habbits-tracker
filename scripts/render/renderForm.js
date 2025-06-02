@@ -41,10 +41,23 @@ export default function renderForm(inputPlaceholder) {
     if (index < habbits.habbitsArr[activeID.id].days.length - 1) {
       setComment(index, comment);
     } else {
-      habbits.habbitsArr[activeID.id].days.push({ comment: comment });
-      console.log(habbits);
-      saveData(habbits);
+      const updatedHabbits = {
+        ...habbits,
+        habbitsArr: habbits.habbitsArr.map((habit, index) =>
+          index === activeID.id
+            ? { ...habit, days: [...habit.days, { comment }] }
+            : habit
+        ),
+      };
+      habbits.habbitsArr = habbits.habbitsArr.map((habbit, i) =>
+        i === activeID.id
+          ? { ...habbit, days: [...habbit.days, { comment }] }
+          : habbit
+      );
+      console.log(habbits.habbitsArr);
+      saveData(habbits.habbitsArr);
       rerender();
+      //habbits.habbitsArr[activeID.id].days.push({ comment: comment });
     }
   });
   return form;

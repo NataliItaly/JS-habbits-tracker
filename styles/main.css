@@ -164,6 +164,7 @@ main {
   display: flex;
   align-items: center;
   margin-bottom: 12px;
+  position: relative;
 }
 
 .day__next {
@@ -180,6 +181,49 @@ main {
   min-width: 150px;
 }
 
+.day__delete-btn {
+  color: red;
+  background-color: #f7b6b6;
+}
+
+.day__popup {
+  visibility: hidden;
+  opacity: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  padding: 10px;
+  background: #f7b6b6;
+  border-radius: 12px;
+  color: red;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  -ms-border-radius: 12px;
+  -o-border-radius: 12px;
+  transition: opacity 0.3s ease-in-out;
+  -webkit-transition: opacity 0.3s ease-in-out;
+  -moz-transition: opacity 0.3s ease-in-out;
+  -ms-transition: opacity 0.3s ease-in-out;
+  -o-transition: opacity 0.3s ease-in-out;
+}
+
+.day__popup_visible {
+  visibility: visible;
+  opacity: 1;
+}
+
+.day__popup-btn {
+  padding: 7px 10px;
+  color: #232360;
+  width: fit-content;
+}
+
 .day__comment {
   height: 42px;
   flex-grow: 1;
@@ -194,22 +238,22 @@ main {
   flex-grow: 1;
 }
 
-.day__delete {
+.day__comment-delete {
   margin-right: 0;
   background: none;
   border: none;
   cursor: pointer;
   border-radius: 5px;
   padding: 2px;
-  color: red;
-  background-color: #f7b6b6;
+  color: orangered;
+  background-color: #f3cf8b;
 }
 
-.day__delete:hover {
+.day__comment-delete:hover {
   background: #eff2ff;
 }
 
-.day__edit {
+.day__comment-edit {
   color: green;
   background-color: rgb(151, 245, 151);
 }
