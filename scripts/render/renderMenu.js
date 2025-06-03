@@ -14,11 +14,7 @@ export default function renderMenu(activeHabbit) {
       newElement.classList.add('menu__item');
       newElement.innerHTML = `<img src="./images/${habbit.icon}.svg" alt="${habbit.name}" />`;
       newElement.addEventListener('click', () => {
-        console.log('click menu');
-        console.log(activeID);
         activeID.id = habbit.id;
-        console.log(activeID);
-
         rerender();
       });
       if (activeHabbit.id === habbit.id) {

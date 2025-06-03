@@ -16,10 +16,11 @@ import togglePopup from './utils/togglePopup.js';
 import setIcon from './utils/setIcon.js';
 import validateForm from './utils/validateForm.js';
 import resetForm from './utils/resetForm.js';
+import activeHabbit from './variables/activeHabbit.js';
 
 
 window.addEventListener('DOMContentLoaded',()=>{
-  console.log('loaded')
+  //console.log('loaded')
     if(!localStorage.getItem(HABBIT_KEY)) {
       saveData(data);
     }
@@ -27,7 +28,7 @@ window.addEventListener('DOMContentLoaded',()=>{
 
     //rerender();
     const hashId = Number(document.location.hash.replace('#', ''));
-    console.log('hash', hashId)
+    //console.log('hash', hashId)
     const urlHabbitId = habbits.habbitsArr.find(habbit => habbit.id === hashId - 1);
     if (urlHabbitId) {
       rerender(urlHabbitId.id)
@@ -47,10 +48,23 @@ page.main.main.addEventListener('click', (e) => {
     setComment(index, '');
   }
   if (e.target.matches('.day__comment-edit')) {
-    const currentDay = getCurrentDay(e);
-    currentDay.querySelector('.day__comment').remove()
-    const form = renderForm('Edit your comment');
-    currentDay.append(form)
+    const currentDay = getCurrentDay(e)
+    const currentDayIndex = getEventTargetIndex(e);
+    const dayContent = currentDay.querySelector('.day__content');
+    const inputPlaceholder = activeHabbit().days[currentDayIndex].comment
+    const form = renderForm(inputPlaceholder);
+
+    dayContent.querySelector('.day__comment').remove()
+    dayContent.append(form)
+  }
+
+  if (e.target.matches('.habbit__skip-comment')) {
+    const form = e.target.closest('form');
+    //console.log(form)
+    form.addEventListener('reset', function() {
+      console.log('reset');
+    });
+    rerender();
   }
 
   if (e.target.matches('.day__delete-btn')) {
@@ -100,7 +114,7 @@ page.popup.form.addEventListener('submit', function(e) {
     return;
   }
   habbits.habbitsArr = [...habbits.habbitsArr, {id: habbits.habbitsArr.length, name: data.name, target: data.target, icon: data.icon, days: []}];
-  console.log(habbits);
+  //console.log(habbits);
 
   saveData(habbits.habbitsArr);
   rerender();

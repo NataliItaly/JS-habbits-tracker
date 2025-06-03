@@ -2,6 +2,7 @@ import { page } from '../variables/page.js';
 import renderForm from './renderForm.js';
 
 export default function renderBody(activeHabbit) {
+  console.log('active habbit ', activeHabbit);
   activeHabbit.days.forEach((day, i) => {
     const currentDay = document.createElement('div');
     currentDay.classList.add('day');
@@ -10,19 +11,34 @@ export default function renderBody(activeHabbit) {
     currentDayIndex.textContent = `Day ${i + 1}`;
     currentDay.append(currentDayIndex);
 
-    if (day.comment !== '') {
-      const comment = `
+    const dayContent = document.createElement('div');
+    dayContent.classList.add('day__content');
+    currentDay.append(dayContent);
+
+    const dayComment =
+      day.comment === ''
+        ? `<span class="day__comment_null">You don't have a comment here</span>`
+        : day.comment;
+    const commentTagBtnText =
+      day.comment === '' ? 'Add comment' : 'Edit comment';
+
+    const deleteCommentBtn =
+      day.comment === ''
+        ? ''
+        : `<button class="button day__comment-delete">Delete comment</button>`;
+    const comment = `
           <div class="day__comment">
-            <p class="day__comment-text">${day.comment}</p>
-            <button class="button day__comment-delete">Delete comment</button>
-            <button class="button day__comment-edit">Edit comment</button>
+            <p class="day__comment-text">${dayComment}</p>
+            <button class="button day__comment-edit">${commentTagBtnText}</button>
+            ${deleteCommentBtn}
           </div>
         `;
-      currentDay.insertAdjacentHTML('beforeend', comment);
-    } else {
-      const form = renderForm('Edit your comment');
-      currentDay.insertAdjacentElement('beforeend', form);
-    }
+
+    dayContent.insertAdjacentHTML('afterbegin', comment);
+
+    //if (day.comment !== '')
+    // comment.insertAdjacentHTML('beforeend', deleteCommentBtn);
+
     const deleteDayBtn = document.createElement('button');
     deleteDayBtn.classList.add('day__delete-btn', 'button');
     deleteDayBtn.textContent = 'Delete day';
@@ -37,7 +53,7 @@ export default function renderBody(activeHabbit) {
       <button class="day__popup-close">x</button>
       `;
     deleteDayPopUp.addEventListener('click', function (e) {});
-    currentDay.append(deleteDayPopUp);
+    dayContent.append(deleteDayPopUp);
 
     page.main.main.append(currentDay);
   });

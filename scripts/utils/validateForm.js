@@ -5,10 +5,8 @@ export default function validateForm(form, fields) {
 
   for (const field of fields) {
     const fieldValue = formData.get(field);
-    console.log(fieldValue);
     form[field].classList.remove('error');
     if (!fieldValue) {
-      console.log('no value ', fieldValue);
       form[field].classList.add('error');
       return;
     }

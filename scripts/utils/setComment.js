@@ -8,4 +8,5 @@ export default function setComment(index, text) {
 
   saveData(habbits.habbitsArr);
   rerender(activeID.id);
+  console.log('rerender comment:  ', text);
 }

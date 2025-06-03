@@ -15,27 +15,29 @@ export default function renderForm(inputPlaceholder) {
         class="input_icon"
         type="text"
         placeholder="${inputPlaceholder}"
-        value=""
+        value="${inputPlaceholder}"
         />
         <img
         class="input__icon"
         src="./images/comment.svg"
         alt="Comment item"
         />
+        <input class="button habbit__skip-comment" type="reset" value="Skip for now">
         <button class="button" type="submit">Done</button>
         `;
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     const index = getEventTargetIndex(e);
+    console.log('index', index);
     const formData = validateForm(e.target, ['comment']);
     console.log(formData);
     if (!formData) {
       return;
     }
     const comment = formData.comment;
-
-    if (index < habbits.habbitsArr[activeID.id].days.length - 1) {
+    console.log(this);
+    if (index <= habbits.habbitsArr[activeID.id].days.length - 1) {
       setComment(index, comment);
     } else {
       habbits.habbitsArr = habbits.habbitsArr.map((habbit, i) =>
@@ -43,10 +45,17 @@ export default function renderForm(inputPlaceholder) {
           ? { ...habbit, days: [...habbit.days, { comment }] }
           : habbit
       );
-      console.log(habbits.habbitsArr);
       saveData(habbits.habbitsArr);
       rerender();
     }
   });
+
+  //console.log(form.querySelector('.habbit__skip-comment'));
+  form.addEventListener('reset', function () {
+    console.log('reset');
+    //form.reset();
+  });
+
   return form;
 }
+//<button class="button habbit__skip-comment" type="reset">Skip for now</button>

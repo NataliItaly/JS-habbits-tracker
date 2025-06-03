@@ -8,7 +8,8 @@
       { "comment": "The first approach is always difficult" },
       { "comment": "The second day is already easier" },
       { "comment": "The third day was normal" },
-      { "comment": "It starts to be a habbit" }
+      { "comment": "It starts to be a habbit" },
+      { "comment": "" }
     ]
   },
   {
@@ -16,6 +17,11 @@
     "icon": "food",
     "name": "Proper nutrition",
     "target": 10,
-    "days": [{ "comment": "Cool!" }]
+    "days": [
+      { "comment": "Cool!" },
+      { "comment": "" },
+      { "comment": "" },
+      { "comment": "" }
+    ]
   }
 ]

@@ -13,10 +13,11 @@ export const page = {
     main: document.querySelector('main'),
     days: document.querySelector('.days'),
     habbit: {
-      day: document.querySelector('.habbit__day'),
+      day: document.querySelectorAll('.habbit__day'),
       form: document.querySelector('.habbit__form'),
       delete: document.querySelector('.habbit__delete'),
       comments: document.querySelectorAll('.habbit__comment'),
+      formReset: document.querySelector('.habbit__skip-comment'),
     },
   },
   popup: {
