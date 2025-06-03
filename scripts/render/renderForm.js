@@ -6,7 +6,7 @@ import saveData from '../utils/saveData.js';
 import rerender from './rerender.js';
 import validateForm from '../utils/validateForm.js';
 
-export default function renderForm(inputPlaceholder) {
+export default function renderForm(placeholder, value) {
   const form = document.createElement('form');
   form.classList.add('habbit__form');
   form.innerHTML = `
@@ -14,8 +14,8 @@ export default function renderForm(inputPlaceholder) {
         name="comment"
         class="input_icon"
         type="text"
-        placeholder="${inputPlaceholder}"
-        value="${inputPlaceholder}"
+        placeholder="${placeholder}"
+        value="${value}"
         />
         <img
         class="input__icon"

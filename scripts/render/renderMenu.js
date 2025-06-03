@@ -15,6 +15,10 @@ export default function renderMenu(activeHabbit) {
       newElement.innerHTML = `<img src="./images/${habbit.icon}.svg" alt="${habbit.name}" />`;
       newElement.addEventListener('click', () => {
         activeID.id = habbit.id;
+        /*if (page.content.querySelector('.content_null')) {
+          console.log(page.content.querySelector('.content_null'));
+          page.content.querySelector('.content_null').remove();
+        }*/
         rerender();
       });
       if (activeHabbit.id === habbit.id) {

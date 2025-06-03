@@ -9,6 +9,7 @@ export const page = {
     progressPercent: document.querySelector('.progress__percent'),
     progressCoverBar: document.querySelector('.progress__cover-bar'),
   },
+  content: document.querySelector('.content'),
   main: {
     main: document.querySelector('main'),
     days: document.querySelector('.days'),

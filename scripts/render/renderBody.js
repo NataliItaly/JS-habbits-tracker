@@ -63,7 +63,7 @@ export default function renderBody(activeHabbit) {
   nextDayIndex.classList.add('day__index');
   nextDayIndex.textContent = `Day ${activeHabbit.days.length + 1}`;
   nextDay.append(nextDayIndex);
-  nextDay.append(renderForm('Add new day'));
+  nextDay.append(renderForm('Add new day', ''));
 
   page.main.main.append(nextDay);
 }

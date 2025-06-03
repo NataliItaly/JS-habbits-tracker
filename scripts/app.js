@@ -1,11 +1,12 @@
 'use strict';
-import data from '../data/demo.json'  with { type: 'json' };
+import data from '../data/demo2.json'  with { type: 'json' };
 import { HABBIT_KEY } from './variables/habbitKey.js';
 import {page} from './variables/page.js';
 import { activeID } from './variables/activeId.js';
 import { habbits } from './variables/habbits.js';
 import loadData from './utils/loadData.js';
 import saveData from './utils/saveData.js';
+import renderNullContent from './render/renderNullContent.js';
 import rerender from './render/rerender.js';
 import renderForm from './render/renderForm.js';
 import getEventTargetIndex from './utils/getEventTargetIndex.js';
@@ -26,15 +27,30 @@ window.addEventListener('DOMContentLoaded',()=>{
     }
     habbits.habbitsArr = loadData(habbits);
 
-    //rerender();
-    const hashId = Number(document.location.hash.replace('#', ''));
-    //console.log('hash', hashId)
-    const urlHabbitId = habbits.habbitsArr.find(habbit => habbit.id === hashId - 1);
-    if (urlHabbitId) {
-      rerender(urlHabbitId.id)
+console.log(habbits)
+    if (habbits.habbitsArr.length === 0) {
+      console.log('length 0')
+      const nullContent = renderNullContent();
+      page.content.append(nullContent);
     }
     else {
-      rerender()
+      console.log('content', page.content)
+      /*if (page.content.querySelector('.content_null')) {
+        console.log(page.content.querySelector('.content_null'))
+        page.content.querySelector('.content_null').remove();
+      }*/
+      rerender();
+
+      const hashId = Number(document.location.hash.replace('#', ''));
+      //console.log('hash', hashId)
+      const urlHabbitId = habbits.habbitsArr.find(habbit => habbit.id === hashId - 1);
+      console.log(urlHabbitId)
+      if (urlHabbitId) {
+        rerender(urlHabbitId.id)
+      }
+      else {
+        rerender()
+      }
     }
   });
 
@@ -52,7 +68,7 @@ page.main.main.addEventListener('click', (e) => {
     const currentDayIndex = getEventTargetIndex(e);
     const dayContent = currentDay.querySelector('.day__content');
     const inputPlaceholder = activeHabbit().days[currentDayIndex].comment
-    const form = renderForm(inputPlaceholder);
+    const form = renderForm(inputPlaceholder, inputPlaceholder);
 
     dayContent.querySelector('.day__comment').remove()
     dayContent.append(form)
@@ -118,7 +134,6 @@ page.popup.form.addEventListener('submit', function(e) {
 
   saveData(habbits.habbitsArr);
   rerender();
-
 
   togglePopup();
 
