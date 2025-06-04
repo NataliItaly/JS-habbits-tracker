@@ -4,6 +4,7 @@ import { activeID } from '../variables/activeId.js';
 import rerender from './rerender.js';
 
 export default function renderMenu(activeHabbit) {
+  console.log('active habbit from menu ', activeHabbit);
   page.main.main.innerHTML = '';
 
   for (const habbit of habbits.habbitsArr) {
@@ -13,14 +14,8 @@ export default function renderMenu(activeHabbit) {
       newElement.setAttribute('menu-habbit-id', habbit.id);
       newElement.classList.add('menu__item');
       newElement.innerHTML = `<img src="./images/${habbit.icon}.svg" alt="${habbit.name}" />`;
-      newElement.addEventListener('click', () => {
-        activeID.id = habbit.id;
-        /*if (page.content.querySelector('.content_null')) {
-          console.log(page.content.querySelector('.content_null'));
-          page.content.querySelector('.content_null').remove();
-        }*/
-        rerender();
-      });
+      newElement.addEventListener('click', () => rerender(habbit.id));
+
       if (activeHabbit.id === habbit.id) {
         newElement.classList.add('menu__item_active');
       }

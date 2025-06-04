@@ -2,7 +2,6 @@ import { page } from '../variables/page.js';
 import renderForm from './renderForm.js';
 
 export default function renderBody(activeHabbit) {
-  console.log('active habbit ', activeHabbit);
   activeHabbit.days.forEach((day, i) => {
     const currentDay = document.createElement('div');
     currentDay.classList.add('day');

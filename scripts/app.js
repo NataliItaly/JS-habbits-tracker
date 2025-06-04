@@ -1,5 +1,5 @@
 'use strict';
-import data from '../data/demo2.json'  with { type: 'json' };
+import data from '../data/demo.json'  with { type: 'json' };
 import { HABBIT_KEY } from './variables/habbitKey.js';
 import {page} from './variables/page.js';
 import { activeID } from './variables/activeId.js';
@@ -21,42 +21,31 @@ import activeHabbit from './variables/activeHabbit.js';
 
 
 window.addEventListener('DOMContentLoaded',()=>{
-  //console.log('loaded')
     if(!localStorage.getItem(HABBIT_KEY)) {
       saveData(data);
     }
     habbits.habbitsArr = loadData(habbits);
 
-console.log(habbits)
     if (habbits.habbitsArr.length === 0) {
-      console.log('length 0')
       const nullContent = renderNullContent();
       page.content.append(nullContent);
     }
     else {
-      console.log('content', page.content)
-      /*if (page.content.querySelector('.content_null')) {
-        console.log(page.content.querySelector('.content_null'))
-        page.content.querySelector('.content_null').remove();
-      }*/
-      rerender();
-
       const hashId = Number(document.location.hash.replace('#', ''));
-      //console.log('hash', hashId)
-      const urlHabbitId = habbits.habbitsArr.find(habbit => habbit.id === hashId - 1);
-      console.log(urlHabbitId)
-      if (urlHabbitId) {
-        rerender(urlHabbitId.id)
+      console.log('hash', hashId)
+      const urlHabbit = habbits.habbitsArr.find(habbit => habbit.id === hashId);
+      console.log('urlHabbit ', urlHabbit)
+      if (urlHabbit) {
+        console.log(urlHabbit)
+        activeID.id = urlHabbit.id;
+        rerender(activeID.id);
       }
       else {
-        rerender()
+        rerender(habbits.habbitsArr[0].id)
       }
     }
   });
 
-(() => {
-
-})()
 
 page.main.main.addEventListener('click', (e) => {
   if (e.target.matches('.day__comment-delete')) {
@@ -67,7 +56,8 @@ page.main.main.addEventListener('click', (e) => {
     const currentDay = getCurrentDay(e)
     const currentDayIndex = getEventTargetIndex(e);
     const dayContent = currentDay.querySelector('.day__content');
-    const inputPlaceholder = activeHabbit().days[currentDayIndex].comment
+    console.log(activeID.id)
+    const inputPlaceholder = activeHabbit(activeID.id).days[currentDayIndex].comment
     const form = renderForm(inputPlaceholder, inputPlaceholder);
 
     dayContent.querySelector('.day__comment').remove()
@@ -76,22 +66,22 @@ page.main.main.addEventListener('click', (e) => {
 
   if (e.target.matches('.habbit__skip-comment')) {
     const form = e.target.closest('form');
-    //console.log(form)
     form.addEventListener('reset', function() {
-      console.log('reset');
     });
-    rerender();
+    rerender(activeID.id);
   }
 
   if (e.target.matches('.day__delete-btn')) {
     toggleDayPopup(e)
   }
+
   if (e.target.matches('.day__popup-btn')) {
     const index = getEventTargetIndex(e);
     const currentDay = getCurrentDay(e);
     currentDay.remove();
     habbits.habbitsArr = habbits.habbitsArr.map((habbit, i) => {
-      if (i === activeID.id) {
+      // activeID.id starts from 1 !!!!!
+      if (i === (activeID.id - 1)) {
         const filteredDays = habbit.days.filter((day, ind) => ind !== index );
         return  {...habbit, days: [...filteredDays]}
       }
@@ -100,7 +90,7 @@ page.main.main.addEventListener('click', (e) => {
       }
     })
     saveData(habbits.habbitsArr);
-    rerender();
+    rerender(activeID.id);
   }
   if (e.target.matches('.day__popup-close')) {
     toggleDayPopup(e)
@@ -133,7 +123,7 @@ page.popup.form.addEventListener('submit', function(e) {
   //console.log(habbits);
 
   saveData(habbits.habbitsArr);
-  rerender();
+  rerender(activeID.id);
 
   togglePopup();
 

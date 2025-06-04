@@ -1,6 +1,6 @@
 [
   {
-    "id": 0,
+    "id": 1,
     "icon": "sport",
     "name": "Push-ups",
     "target": 10,
@@ -13,13 +13,25 @@
     ]
   },
   {
-    "id": 1,
+    "id": 2,
     "icon": "food",
     "name": "Proper nutrition",
     "target": 10,
     "days": [
       { "comment": "Cool!" },
       { "comment": "" },
+      { "comment": "" },
+      { "comment": "" }
+    ]
+  },
+  {
+    "id": 3,
+    "icon": "drink",
+    "name": "Drink water",
+    "target": 100,
+    "days": [
+      { "comment": "Cool!" },
+      { "comment": "Drink" },
       { "comment": "" },
       { "comment": "" }
     ]

@@ -29,33 +29,23 @@ export default function renderForm(placeholder, value) {
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     const index = getEventTargetIndex(e);
-    console.log('index', index);
     const formData = validateForm(e.target, ['comment']);
-    console.log(formData);
     if (!formData) {
       return;
     }
     const comment = formData.comment;
-    console.log(this);
-    if (index <= habbits.habbitsArr[activeID.id].days.length - 1) {
+    if (index <= habbits.habbitsArr[activeID.id - 1].days.length - 1) {
       setComment(index, comment);
     } else {
       habbits.habbitsArr = habbits.habbitsArr.map((habbit, i) =>
-        i === activeID.id
+        i === activeID.id - 1
           ? { ...habbit, days: [...habbit.days, { comment }] }
           : habbit
       );
       saveData(habbits.habbitsArr);
-      rerender();
+      rerender(activeID.id);
     }
-  });
-
-  //console.log(form.querySelector('.habbit__skip-comment'));
-  form.addEventListener('reset', function () {
-    console.log('reset');
-    //form.reset();
   });
 
   return form;
 }
-//<button class="button habbit__skip-comment" type="reset">Skip for now</button>

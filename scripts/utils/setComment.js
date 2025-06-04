@@ -4,9 +4,8 @@ import saveData from './saveData.js';
 import rerender from '../render/rerender.js';
 
 export default function setComment(index, text) {
-  habbits.habbitsArr[activeID.id].days[index].comment = text;
+  habbits.habbitsArr[activeID.id - 1].days[index].comment = text;
 
   saveData(habbits.habbitsArr);
   rerender(activeID.id);
-  console.log('rerender comment:  ', text);
 }
