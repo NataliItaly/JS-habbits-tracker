@@ -5,7 +5,7 @@ export const page = {
     menuAddBtn: document.querySelector('.menu__add'),
   },
   header: {
-    h1: document.querySelector('.h1'),
+    h1: document.querySelector('.header__title'),
     progressPercent: document.querySelector('.progress__percent'),
     progressCoverBar: document.querySelector('.progress__cover-bar'),
   },

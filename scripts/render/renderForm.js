@@ -23,7 +23,7 @@ export default function renderForm(placeholder, value) {
         alt="Comment item"
         />
         <input class="button habbit__skip-comment" type="reset" value="Skip for now">
-        <button class="button" type="submit">Done</button>
+        <button class="button habbit__done-btn" type="submit"></button>
         `;
 
   form.addEventListener('submit', function (e) {

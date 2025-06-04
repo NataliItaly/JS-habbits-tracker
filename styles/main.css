@@ -5,7 +5,7 @@
 body {
   font-family: 'Comfortaa', cursive;
   margin: 0;
-  background-color: #f3f6fd;
+  background-color: #ffffde;
   font-weight: 400;
 }
 
@@ -15,12 +15,13 @@ body {
 
 .logo {
   margin-bottom: 50px;
+  width: 120px;
 }
 
 .panel {
-  background: white;
+  background: #bbf3bb;
   min-height: 100vh;
-  padding: 30px;
+  padding: 30px 10px;
 }
 
 .menu {
@@ -45,10 +46,15 @@ body {
   height: 45px;
   width: 45px;
   cursor: pointer;
+  transition: 0.4s;
+  -webkit-transition: 0.4s;
+  -moz-transition: 0.4s;
+  -ms-transition: 0.4s;
+  -o-transition: 0.4s;
 }
 
 .menu__item:hover {
-  background: #6a6afb;
+  background: #49ef8d;
 }
 
 .menu__item:hover img {
@@ -56,7 +62,7 @@ body {
 }
 
 .menu__item_active {
-  background: #5051f9;
+  background: #06ad51;
 }
 
 .menu__item_active img {
@@ -65,15 +71,32 @@ body {
 
 .menu__add {
   background: none;
-  border: 1px solid #cad5ff;
+  border: 1px solid #06ad51;
   border-radius: 14px;
   height: 45px;
   width: 45px;
   cursor: pointer;
+  transition: 0.4s;
+  -webkit-transition: 0.4s;
+  -moz-transition: 0.4s;
+  -ms-transition: 0.4s;
+  -o-transition: 0.4s;
 }
 
 .menu__add:hover {
-  background: #eff2ff;
+  background-color: #06ad51;
+}
+
+.menu__add img {
+  transition: 0.4s;
+  -webkit-transition: 0.4s;
+  -moz-transition: 0.4s;
+  -ms-transition: 0.4s;
+  -o-transition: 0.4s;
+}
+
+.menu__add:hover img {
+  filter: brightness(0) invert(1);
 }
 
 .content {
@@ -85,7 +108,7 @@ body {
 .button {
   width: 60px;
   height: 40px;
-  background: #fbfaff;
+  background: #bbf3bb;
   border-radius: 9px;
   border: none;
   font-size: 13px;
@@ -93,6 +116,11 @@ body {
   color: #5051f9;
   padding: 10px;
   cursor: pointer;
+  transition: 0.4s;
+  -webkit-transition: 0.4s;
+  -moz-transition: 0.4s;
+  -ms-transition: 0.4s;
+  -o-transition: 0.4s;
 }
 
 header {
@@ -101,14 +129,17 @@ header {
   align-items: center;
 }
 
-h1 {
+.header__title {
+  font-family: 'Krona One', sans-serif;
+  font-weight: 400;
+  font-style: normal;
   font-size: 30px;
-  line-height: 33px;
-  color: #000000;
+  line-height: 1;
+  color: #06ad51;
 }
 
 .header__delete-habbit-btn {
-  background: #fbfaff url(../images/delete-habbit.svg) no-repeat center / 25px;
+  background: #bbf3bb url(../images/delete-habbit.svg) no-repeat center / 25px;
   margin-right: auto;
 }
 
@@ -153,7 +184,7 @@ h1 {
   transition: all 0.5s;
   height: 5px;
   border-radius: 4px;
-  background: #5051f9;
+  background: #06ad51;
   transition: 0.5s;
   -webkit-transition: 0.5s;
   -moz-transition: 0.5s;
@@ -195,7 +226,7 @@ main {
 }
 
 .day__index {
-  background: #fbfaff;
+  background: #bbf3bb;
   border-radius: 10px 0 0 10px;
   border-right: 1px solid #e7ebfb;
   font-size: 14px;
@@ -211,7 +242,7 @@ main {
 
 .day__delete-btn {
   color: red;
-  background: #fbfaff url(../images/delete-day.svg) no-repeat center / 25px;
+  background: #bbf3bb url(../images/delete-day.svg) no-repeat center / 25px;
 }
 
 .day__delete-btn:hover {
@@ -284,7 +315,7 @@ main {
 }
 
 .day__comment_null {
-  color: blue;
+  color: #06ad51;
 }
 
 .day__comment-delete {
@@ -294,7 +325,7 @@ main {
   cursor: pointer;
   padding: 2px;
   color: orangered;
-  background: #fbfaff url(../images/delete-comment.svg) no-repeat center / 20px;
+  background: #bbf3bb url(../images/delete-comment.svg) no-repeat center / 20px;
 }
 
 .day__comment-delete:hover {
@@ -303,7 +334,7 @@ main {
 
 .day__comment-edit {
   color: green;
-  background: #fbfaff url(../images/edit-comment.svg) no-repeat center / 18px;
+  background: #bbf3bb url(../images/edit-comment.svg) no-repeat center / 18px;
 }
 
 .day__comment-edit:hover {
@@ -323,11 +354,11 @@ input {
 }
 
 .day input::placeholder {
-  color: #39f539;
+  color: #04db65;
 }
 
 .day__next input::placeholder {
-  color: #5051f9;
+  color: #04db65;
 }
 
 input.error {
@@ -343,8 +374,17 @@ input.error {
 }
 
 .habbit__skip-comment {
-  background-color: rgb(0, 82, 158);
-  color: yellow;
+  width: 95px;
+  flex-grow: 0;
+  color: #06ad51;
+}
+
+.habbit__done-btn {
+  background: #bbf3bb url(../images/checkmark.svg) no-repeat center / 24px;
+}
+
+.habbit__done-btn:hover {
+  background: #eff2ff url(../images/checkmark.svg) no-repeat center / 24px;
 }
 
 .input_icon {
