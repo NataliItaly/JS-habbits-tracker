@@ -82,9 +82,22 @@ body {
   position: relative;
 }
 
+.button {
+  width: 60px;
+  height: 40px;
+  background: #fbfaff;
+  border-radius: 9px;
+  border: none;
+  font-size: 13px;
+  line-height: 14px;
+  color: #5051f9;
+  padding: 10px;
+  cursor: pointer;
+}
+
 header {
   display: flex;
-  justify-content: space-between;
+  gap: 20px;
   align-items: center;
 }
 
@@ -92,6 +105,15 @@ h1 {
   font-size: 30px;
   line-height: 33px;
   color: #000000;
+}
+
+.header__delete-habbit-btn {
+  background: #fbfaff url(../images/delete-habbit.svg) no-repeat center / 25px;
+  margin-right: auto;
+}
+
+.header__delete-habbit-btn:hover {
+  background: #eff2ff url(../images/delete-habbit.svg) no-repeat center / 25px;
 }
 
 .progress {
@@ -158,24 +180,9 @@ main {
   z-index: 5;
 }
 
-.button {
-  width: 100px;
-  background: #edecfe;
-  border-radius: 9px;
-  border: none;
-  font-size: 13px;
-  line-height: 14px;
-  color: #5051f9;
-  padding: 10px;
-  cursor: pointer;
-}
-
-.button:hover {
-  background: #dcdaff;
-}
-
 .day {
   background: #ffffff;
+  padding-right: 10px;
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -204,7 +211,11 @@ main {
 
 .day__delete-btn {
   color: red;
-  background-color: #f7b6b6;
+  background: #fbfaff url(../images/delete-day.svg) no-repeat center / 25px;
+}
+
+.day__delete-btn:hover {
+  background: #eff2ff url(../images/delete-day.svg) no-repeat center / 25px;
 }
 
 .day__popup {
@@ -283,16 +294,20 @@ main {
   cursor: pointer;
   padding: 2px;
   color: orangered;
-  background-color: #f3cf8b;
+  background: #fbfaff url(../images/delete-comment.svg) no-repeat center / 20px;
 }
 
 .day__comment-delete:hover {
-  background: #eff2ff;
+  background: #eff2ff url(../images/delete-comment.svg) no-repeat center / 20px;
 }
 
 .day__comment-edit {
   color: green;
-  background-color: rgb(151, 245, 151);
+  background: #fbfaff url(../images/edit-comment.svg) no-repeat center / 18px;
+}
+
+.day__comment-edit:hover {
+  background: #eff2ff url(../images/edit-comment.svg) no-repeat center / 18px;
 }
 
 input {
