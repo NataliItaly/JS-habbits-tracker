@@ -18,10 +18,10 @@ export default function renderBody(activeHabbit) {
       day.comment === ''
         ? `<span class="day__comment_null">You don't have a comment here</span>`
         : day.comment;
-    const commentTagBtnText =
+    const commentBtn =
       day.comment === ''
-        ? 'Add comment'
-        : '<img src="../../images/edit-comment.svg">';
+        ? '<button class="button day__comment-edit day__add"></button>'
+        : '<button class="button day__comment-edit day__edit"></button>';
 
     const deleteCommentBtn =
       day.comment === ''
@@ -30,19 +30,15 @@ export default function renderBody(activeHabbit) {
     const comment = `
           <div class="day__comment">
             <p class="day__comment-text">${dayComment}</p>
-            <button class="button day__comment-edit"></button>
+            ${commentBtn}
             ${deleteCommentBtn}
           </div>
         `;
 
     dayContent.insertAdjacentHTML('afterbegin', comment);
 
-    //if (day.comment !== '')
-    // comment.insertAdjacentHTML('beforeend', deleteCommentBtn);
-
     const deleteDayBtn = document.createElement('button');
     deleteDayBtn.classList.add('day__delete-btn', 'button');
-    //deleteDayBtn.innerHTML = '';
     deleteDayBtn.addEventListener('click', function (e) {});
     currentDay.append(deleteDayBtn);
 

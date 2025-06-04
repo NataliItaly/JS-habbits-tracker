@@ -2,7 +2,7 @@
   {
     "id": 1,
     "icon": "sport",
-    "name": "Push-ups",
+    "name": "Sport",
     "target": 10,
     "days": [
       { "comment": "The first approach is always difficult" },

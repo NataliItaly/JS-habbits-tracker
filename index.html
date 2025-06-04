@@ -43,12 +43,16 @@
           <div id="days"></div>
         </main>
         <footer>
-          <p>GitHub</p>
+          <p>
+            <a href="https://github.com/NataliItaly?tab=repositories"
+              ><img src="./images/github.svg" alt="GitHub link"
+            /></a>
+          </p>
         </footer>
       </div>
       <div class="cover cover_hidden" id="habbit-popup">
         <div class="popup">
-          <h2>Новая привычка</h2>
+          <h2 class="popup__title">New Habbit</h2>
           <div class="icon-label">Icon</div>
           <div class="icon-select">
             <button class="popup__icon icon icon_active" data-value="sport">
@@ -59,6 +63,12 @@
             </button>
             <button class="popup__icon icon" data-value="food">
               <img src="./images/food.svg" alt="Food" />
+            </button>
+            <button class="popup__icon icon" data-value="study">
+              <img src="./images/study.svg" alt="Study" />
+            </button>
+            <button class="popup__icon icon" data-value="relax">
+              <img src="./images/relax.svg" alt="Relax" />
             </button>
           </div>
           <form class="popup__form">
@@ -72,7 +82,9 @@
               value="sport"
             />
             <input type="number" name="target" placeholder="Target" />
-            <button class="button" type="submit">Add</button>
+            <button class="button popup__btn" type="submit">
+              Add new habbit
+            </button>
           </form>
           <button class="popup__close">
             <img src="./images/close.svg" alt="Close" />
